@@ -1,0 +1,92 @@
+@media only screen and (max-width: 480px) {
+
+
+}
+
+@media only screen and (min-width: 480px) {
+
+/* Set body font*/
+body {
+    font-family: "Merriweather", serif;
+}
+
+/* Set font of headings and buttons */
+button, a, h3, h6{
+    font-family: "Montserrat", sans-serif;*/
+}
+
+/* make buttons and anchor elements look identical */
+button, a {
+  background-color: #998c8b;
+  color: #fff;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+}
+
+/* Style the buttons to darken when mouse hovers over them*/
+button:hover, a:hover {
+  background-color: #807271;
+}
+
+/* resize images to be the same size */
+img {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+/* create two columns */
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+/* style the left column */
+.left-column {
+  flex: 1;
+  padding: 10px;
+}
+
+/* style the right column */
+.right-column {
+  flex: 2;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/* add borders to the two columns */
+.left-column, .right-column {
+  border: 1px solid #ccc;
+  border-radius: 10px;
+}
+
+/* style h6 elements */
+h6 {
+    font-size: 18px;
+}
+
+/* style unordered lists */
+li {
+  list-style-type: square;
+}
+
+/* Style the tests, by id*/
+[id^="finals_question"] {
+  font-family: Courier, monospace;
+  font-size: 14px;
+}
+
+[id^="finals_question_radio"] {
+  font-size: 12px;
+}
+}

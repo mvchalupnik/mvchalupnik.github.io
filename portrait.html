@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script type="module">import * as gameplay from './__target__/gameplay.js'; window.gameplay = gameplay;</script>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body onload="gameplay.Game()">
+  <section>
+    <div class='row'>
+    <div class="left-column">
+      <h6>Stats</h6>
+      <img src="pics/50by50test.png" alt="" data-image-width="500" data-image-height="322">
+      <p id="happiness_label">Happiness:&nbsp;</p>
+      <p id="knowledge_label" >Knowledge:&nbsp;</p>
+      <p id='research_label'>Research:&nbsp;</p>
+      <p id='day_label'>Day:&nbsp;</p>
+      <p id='lab_label'>Lab:&nbsp;</p>
+      <p id='class_label'>Classes:&nbsp;</p>
+      <ul id='class_list'>
+      </ul>
+    </div>
+    <div id=player_text_box class="right-column">
+      <div id=player_inner_box>
+        <p id="intro_label" >Sample text. Click to select the Text Element.</p>
+      </div>
+    </div>
+  </div>
+  </section>
+</body>
