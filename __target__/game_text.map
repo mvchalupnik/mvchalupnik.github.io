@@ -1,0 +1,8 @@
+{
+	"version": 3,
+	"file": "game_text.js",
+	"sources": [
+		"game_text.py"
+	],
+	"mappings": "AAAA;AAAA;AAAA;AAAA;AAQA;AACA;AACA;AACA;AAGA;AACA;AACA;AACA;AAGA;AAEA;AAMA;AAIA;AAIA;AAuBA;AAyBA;AAiBA;AAOA;AAuCA;AAqBA;AAsBA;AAyBA;AA4BA;AA8CA;AAeA;AA0RA;AAgBA;AAUA;AAWA;AAQA;AASA;AAQA;AAxoBA"
+}
