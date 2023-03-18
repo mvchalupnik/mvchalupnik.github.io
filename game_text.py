@@ -38,7 +38,7 @@ COOL_PHYSICS_LECTURES = [
     {
         "lecture": "Today we're going to DERIVE Snell's Law from electrodynamics! "
         "We will only get halfway through the derivation today.",
-        "image_location": "/pics/snelllaw1.png",
+        "image_location": "/pics/snelllaw1.PNG",
     },
     {
         "lecture": "Today we finish our derivation of Snell's Law! As an added bonus, we get the Law "
@@ -48,7 +48,7 @@ COOL_PHYSICS_LECTURES = [
     {
         "lecture": "What is the electric potential of a dipole? Let's figure it out from the defition "
         "of electric potential, binomial expansions, and law of cosines! Yay!!!!!",
-        "image_location": "pics/griffithsdipole.png",
+        "image_location": "pics/griffithsdipole.PNG",
     },
     {
         "lecture": "What is the energy stored in an electric field? We can figure it out through logic "
@@ -61,24 +61,24 @@ BORING_PHYSICS_LECTURES = [
     {
         "lecture": "Here is the law of reflection. Nobody knows where it comes from. Here is how you "
         "solve problems involving the law of reflection.",
-        "image_location": "pics/reflectionlawboring.png",
+        "image_location": "pics/reflectionlawboring.PNG",
     },
     {
         "lecture": "Here is Snell's Law. It is an experimental law. It cannot be derived. Here is how "
         "you solve problems involving Snell's Law.",
-        "image_location": "pics/boringsnelllaw.png",
+        "image_location": "pics/boringsnelllaw.PNG",
     },
     {
         "lecture": "What is the electric potential of a dipole? Here is the equation. You can "
         "memorize the equation and use it to put numbers in and get numbers out. ",
-        "image_location": "pics/dipoleboring.png",
+        "image_location": "pics/dipoleboring.PNG",
     },
     {
         "lecture": "What is the energy stored in an electric field? It is this equation. "
         "You can put in numbers for E and e0 and 2 and do math on the numbers and get "
         "another number and that number is a number and you can put that number into "
         "another number and then it will be a number with a number.....",
-        "image_location": "pics/workenergyboring.png",
+        "image_location": "pics/workenergyboring.PNG",
     },
 ]
 
@@ -91,11 +91,11 @@ FAKE_PHYSICS_LECTURES = [
     },
     {
         "lecture": "Today we're going to learn about Quantum Physics.",
-        "image_location": "pics/sciencereligion2.png",
+        "image_location": "pics/sciencereligion2.PNG",
     },
     {
         "lecture": "Today we're going to learn about how mass and electromagnetism are related.",
-        "image_location": "pics/yourlegalaction.png",
+        "image_location": "pics/yourlegalaction.PNG",
     },
 ]
 
