@@ -39,7 +39,7 @@ class Game():
         document.getElementById('lab_label').textContent = "Lab: none"
         document.getElementById('class_label').textContent = "Classes: none"
 
-        self.show_main_choices()
+        self.show_main_choices(True)
     
     def show_stat_changes(self, delta_h, delta_k, delta_r):
         """ Show changes in players stats after lab or class event.
@@ -111,9 +111,11 @@ class Game():
         # Display research lab
         document.getElementById('lab_label').textContent = "Lab: " + self.joined_research_lab['lab_name'].lab_name
         
-    def show_main_choices(self):
+    def show_main_choices(self, is_first_screen):
         """ Show the main screen, showing the player's main choices of joining lab and classes, or attending
         lab or classes.
+
+        :param is_first_screen: If true, display intro content
         """
         document.getElementById('player_inner_box').remove()
         new_inner_box = document.createElement('div')
@@ -124,8 +126,11 @@ class Game():
         intro_label = document.createElement('p')
         intro_label.id = 'intro_label'
 
-        intro_label.textContent = "Welcome to University School!\n Here you can take the "\
+        if is_first_screen:
+            intro_label.textContent = "Welcome to University School!\n Here you can take the "\
                                        "first steps to becoming a physics. \nWhat would you like to do today?"
+        else:
+            intro_label.textContent = "What would you like to do today?"
         new_inner_box.appendChild(intro_label)
         
         if len(self.enrolled_physics_classes) == 0:
@@ -243,7 +248,7 @@ class Game():
 
         document.getElementById('player_text_box').appendChild(new_inner_box)
         self.update_portrait()
-        self.show_main_choices()
+        self.show_main_choices(False)
     
     def register_classes(self):
         """ Register for a class by displaying to the player a list of classes with the options to 
@@ -333,13 +338,13 @@ class Game():
             new_inner_box.appendChild(medium_lab_label)
             new_inner_box.appendChild(medium_lab_button)
             document.getElementById('player_text_box').appendChild(new_inner_box)
-            document.getElementById('medium_lab_button').addEventListener("click", self.show_main_choices)
+            document.getElementById('medium_lab_button').addEventListener("click", lambda: self.show_main_choices(False))
         else:
             document.getElementById('player_text_box').appendChild(new_inner_box)
 
             self.joined_research_lab = selected_lab
             self.update_portrait()
-            self.show_main_choices()
+            self.show_main_choices(False)
 
         
     def join_lab(self): 
@@ -415,7 +420,7 @@ class Game():
         # Check for endgame
         status = self.check_for_endgame()
         if status == CONTINUE:
-            self.show_main_choices()
+            self.show_main_choices(False)
         else:
             self.end_game(status)
     
@@ -530,7 +535,7 @@ class Game():
         if status != CONTINUE: 
             self.end_game(status)
         else:
-            self.show_main_choices()
+            self.show_main_choices(False)
     
     def at_lab(self, choice):
         """ Show stat changes and display lab choice text effects for lab scenario and choice
@@ -578,7 +583,7 @@ class Game():
             new_inner_box.appendChild(ran_out_lab_label)
             new_inner_box.appendChild(ran_out_lab_button)
             document.getElementById('player_text_box').appendChild(new_inner_box)
-            document.getElementById('ran_out_lab_button').addEventListener("click", self.show_main_choices)
+            document.getElementById('ran_out_lab_button').addEventListener("click", lambda: self.show_main_choices(False))
 
         else:
             # Create Lab scenario 

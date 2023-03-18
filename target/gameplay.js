@@ -1,4 +1,4 @@
-// Transcrypt'ed from Python, 2023-03-17 23:46:55
+// Transcrypt'ed from Python, 2023-03-18 01:24:52
 import {AssertionError, AttributeError, BaseException, DeprecationWarning, Exception, IndexError, IterableError, KeyError, NotImplementedError, RuntimeWarning, StopIteration, UserWarning, ValueError, Warning, __JsIterator__, __PyIterator__, __Terminal__, __add__, __and__, __call__, __class__, __envir__, __eq__, __floordiv__, __ge__, __get__, __getcm__, __getitem__, __getslice__, __getsm__, __gt__, __i__, __iadd__, __iand__, __idiv__, __ijsmod__, __ilshift__, __imatmul__, __imod__, __imul__, __in__, __init__, __ior__, __ipow__, __irshift__, __isub__, __ixor__, __jsUsePyNext__, __jsmod__, __k__, __kwargtrans__, __le__, __lshift__, __lt__, __matmul__, __mergefields__, __mergekwargtrans__, __mod__, __mul__, __ne__, __neg__, __nest__, __or__, __pow__, __pragma__, __pyUseJsNext__, __rshift__, __setitem__, __setproperty__, __setslice__, __sort__, __specialattrib__, __sub__, __super__, __t__, __terminal__, __truediv__, __withblock__, __xor__, abs, all, any, assert, bool, bytearray, bytes, callable, chr, copy, deepcopy, delattr, dict, dir, divmod, enumerate, filter, float, getattr, hasattr, input, int, isinstance, issubclass, len, list, map, max, min, object, ord, pow, print, property, py_TypeError, py_iter, py_metatype, py_next, py_reversed, py_typeof, range, repr, round, set, setattr, sorted, str, sum, tuple, zip} from './org.transcrypt.__runtime__.js';
 import {BIG_STUFF, BOTH, Choice, Ending, Final, Lab, LabScenario, NONE, PhysicsClass, Question, SMALL_STUFF} from './physics_elements.js';
 import {ALL_CLASSES, ALL_LABS, BAD_STUDENT_ENDING, CHOOSE_CLASS_TEXT, EQUATION_ENDING, GRAD_SCHOOL_ENDING, INTRO_TEXT, JOIN_TEXT, NO_CLASSES_ENDING, REGISTER_TEXT, SAD_ENDING, SCOPE_ENDING, lab_scenarios} from './game_text.js';
@@ -23,7 +23,7 @@ export var Game =  __class__ ('Game', [object], {
 		document.getElementById ('day_label').textContent = 'Day: ' + str (self.day);
 		document.getElementById ('lab_label').textContent = 'Lab: none';
 		document.getElementById ('class_label').textContent = 'Classes: none';
-		self.show_main_choices ();
+		self.show_main_choices (true);
 	});},
 	get show_stat_changes () {return __get__ (this, function (self, delta_h, delta_k, delta_r) {
 		var happiness_label = document.getElementById ('happiness_label');
@@ -82,14 +82,19 @@ export var Game =  __class__ ('Game', [object], {
 		}
 		document.getElementById ('lab_label').textContent = 'Lab: ' + self.joined_research_lab ['lab_name'].lab_name;
 	});},
-	get show_main_choices () {return __get__ (this, function (self) {
+	get show_main_choices () {return __get__ (this, function (self, is_first_screen) {
 		document.getElementById ('player_inner_box').remove ();
 		var new_inner_box = document.createElement ('div');
 		new_inner_box.id = 'player_inner_box';
 		var new_element_ids = [];
 		var intro_label = document.createElement ('p');
 		intro_label.id = 'intro_label';
-		intro_label.textContent = 'Welcome to University School!\n Here you can take the first steps to becoming a physics. \nWhat would you like to do today?';
+		if (is_first_screen) {
+			intro_label.textContent = 'Welcome to University School!\n Here you can take the first steps to becoming a physics. \nWhat would you like to do today?';
+		}
+		else {
+			intro_label.textContent = 'What would you like to do today?';
+		}
 		new_inner_box.appendChild (intro_label);
 		if (len (self.enrolled_physics_classes) == 0) {
 			var button = document.createElement ('button');
@@ -183,7 +188,7 @@ export var Game =  __class__ ('Game', [object], {
 		}
 		document.getElementById ('player_text_box').appendChild (new_inner_box);
 		self.update_portrait ();
-		self.show_main_choices ();
+		self.show_main_choices (false);
 	});},
 	get register_classes () {return __get__ (this, function (self) {
 		document.getElementById ('player_inner_box').remove ();
@@ -243,13 +248,15 @@ export var Game =  __class__ ('Game', [object], {
 			new_inner_box.appendChild (medium_lab_label);
 			new_inner_box.appendChild (medium_lab_button);
 			document.getElementById ('player_text_box').appendChild (new_inner_box);
-			document.getElementById ('medium_lab_button').addEventListener ('click', self.show_main_choices);
+			document.getElementById ('medium_lab_button').addEventListener ('click', (function __lambda__ () {
+				return self.show_main_choices (false);
+			}));
 		}
 		else {
 			document.getElementById ('player_text_box').appendChild (new_inner_box);
 			self.joined_research_lab = selected_lab;
 			self.update_portrait ();
-			self.show_main_choices ();
+			self.show_main_choices (false);
 		}
 	});},
 	get join_lab () {return __get__ (this, function (self) {
@@ -298,7 +305,7 @@ export var Game =  __class__ ('Game', [object], {
 		self.update_portrait ();
 		var status = self.check_for_endgame ();
 		if (status == CONTINUE) {
-			self.show_main_choices ();
+			self.show_main_choices (false);
 		}
 		else {
 			self.end_game (status);
@@ -386,7 +393,7 @@ export var Game =  __class__ ('Game', [object], {
 			self.end_game (status);
 		}
 		else {
-			self.show_main_choices ();
+			self.show_main_choices (false);
 		}
 	});},
 	get at_lab () {return __get__ (this, function (self, choice) {
@@ -420,7 +427,9 @@ export var Game =  __class__ ('Game', [object], {
 			new_inner_box.appendChild (ran_out_lab_label);
 			new_inner_box.appendChild (ran_out_lab_button);
 			document.getElementById ('player_text_box').appendChild (new_inner_box);
-			document.getElementById ('ran_out_lab_button').addEventListener ('click', self.show_main_choices);
+			document.getElementById ('ran_out_lab_button').addEventListener ('click', (function __lambda__ () {
+				return self.show_main_choices (false);
+			}));
 		}
 		else {
 			var lab_title = document.createElement ('h3');
