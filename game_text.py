@@ -38,7 +38,7 @@ COOL_PHYSICS_LECTURES = [
     {
         "lecture": "Today we're going to DERIVE Snell's Law from electrodynamics! "
         "We will only get halfway through the derivation today.",
-        "image_location": "pics/snelllaw1.png",
+        "image_location": "./pics/snelllaw1.png",
     },
     {
         "lecture": "Today we finish our derivation of Snell's Law! As an added bonus, we get the Law "
