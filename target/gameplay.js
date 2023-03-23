@@ -1,4 +1,4 @@
-// Transcrypt'ed from Python, 2023-03-18 01:24:52
+// Transcrypt'ed from Python, 2023-03-23 02:16:29
 import {AssertionError, AttributeError, BaseException, DeprecationWarning, Exception, IndexError, IterableError, KeyError, NotImplementedError, RuntimeWarning, StopIteration, UserWarning, ValueError, Warning, __JsIterator__, __PyIterator__, __Terminal__, __add__, __and__, __call__, __class__, __envir__, __eq__, __floordiv__, __ge__, __get__, __getcm__, __getitem__, __getslice__, __getsm__, __gt__, __i__, __iadd__, __iand__, __idiv__, __ijsmod__, __ilshift__, __imatmul__, __imod__, __imul__, __in__, __init__, __ior__, __ipow__, __irshift__, __isub__, __ixor__, __jsUsePyNext__, __jsmod__, __k__, __kwargtrans__, __le__, __lshift__, __lt__, __matmul__, __mergefields__, __mergekwargtrans__, __mod__, __mul__, __ne__, __neg__, __nest__, __or__, __pow__, __pragma__, __pyUseJsNext__, __rshift__, __setitem__, __setproperty__, __setslice__, __sort__, __specialattrib__, __sub__, __super__, __t__, __terminal__, __truediv__, __withblock__, __xor__, abs, all, any, assert, bool, bytearray, bytes, callable, chr, copy, deepcopy, delattr, dict, dir, divmod, enumerate, filter, float, getattr, hasattr, input, int, isinstance, issubclass, len, list, map, max, min, object, ord, pow, print, property, py_TypeError, py_iter, py_metatype, py_next, py_reversed, py_typeof, range, repr, round, set, setattr, sorted, str, sum, tuple, zip} from './org.transcrypt.__runtime__.js';
 import {BIG_STUFF, BOTH, Choice, Ending, Final, Lab, LabScenario, NONE, PhysicsClass, Question, SMALL_STUFF} from './physics_elements.js';
 import {ALL_CLASSES, ALL_LABS, BAD_STUDENT_ENDING, CHOOSE_CLASS_TEXT, EQUATION_ENDING, GRAD_SCHOOL_ENDING, INTRO_TEXT, JOIN_TEXT, NO_CLASSES_ENDING, REGISTER_TEXT, SAD_ENDING, SCOPE_ENDING, lab_scenarios} from './game_text.js';
@@ -8,6 +8,7 @@ export var debug_endgame_off = true;
 export var CONTINUE = 0;
 export var NEGATIVE_HAPPINESS = 1;
 export var START_FINALS = 2;
+export var NO_CLASSES = 3;
 export var Game =  __class__ ('Game', [object], {
 	__module__: __name__,
 	happiness: 100,
@@ -156,7 +157,12 @@ export var Game =  __class__ ('Game', [object], {
 			return NEGATIVE_HAPPINESS;
 		}
 		if (self.day >= DAYS_IN_QUARTER && debug_endgame_off) {
-			return START_FINALS;
+			if (len (self.enrolled_physics_classes) == 0) {
+				return NO_CLASSES;
+			}
+			else {
+				return START_FINALS;
+			}
 		}
 		return CONTINUE;
 	});},
@@ -569,24 +575,23 @@ export var Game =  __class__ ('Game', [object], {
 	});},
 	get adjust_happiness_from_gpa () {return __get__ (this, function (self, gpa) {
 		if ((3.5 < gpa && gpa <= 4.0)) {
-			self.happiness = self.happiness + 100;
+			return 100;
 		}
 		else if ((3.0 < gpa && gpa <= 3.5)) {
-			self.happiness = self.happiness + 30;
+			return 30;
 		}
 		else if ((2.5 < gpa && gpa <= 3.0)) {
-			self.happiness = self.happiness + 10;
+			return 10;
 		}
 		else if ((2.0 < gpa && gpa <= 2.5)) {
-			self.happiness = self.happiness - 10;
+			return -(10);
 		}
 		else if ((1.0 < gpa && gpa <= 2.0)) {
-			self.happiness = self.happiness - 30;
+			return -(30);
 		}
 		else {
-			self.happiness = self.happiness - 60;
+			return -(60);
 		}
-		self.check_boundaries ();
 	});},
 	get do_final () {return __get__ (this, function (self, class_index) {
 		document.getElementById ('player_inner_box').remove ();
@@ -606,7 +611,9 @@ export var Game =  __class__ ('Game', [object], {
 			}
 			var gpa = float (gpa) / len (self.enrolled_physics_classes);
 			var gpa = (gpa * 4.0) / 3.0;
-			self.adjust_happiness_from_gpa (gpa);
+			var delta_h = self.adjust_happiness_from_gpa (gpa);
+			self.show_stat_changes (delta_h, 0, 0);
+			self.happiness = self.happiness + delta_h;
 			self.check_boundaries ();
 			var end = self.determine_ending ();
 			var grade_text = 'Your GPA is: ' + str (gpa);
@@ -674,6 +681,10 @@ export var Game =  __class__ ('Game', [object], {
 	get end_game () {return __get__ (this, function (self, status) {
 		self.check_boundaries ();
 		self.update_portrait ();
+		if (status == NO_CLASSES) {
+			self.end_screen (NO_CLASSES_ENDING);
+			return ;
+		}
 		document.getElementById ('player_inner_box').remove ();
 		var new_inner_box = document.createElement ('div');
 		new_inner_box.id = 'player_inner_box';
@@ -702,7 +713,7 @@ export var Game =  __class__ ('Game', [object], {
 			}));
 		}
 		else {
-			self.end_screen (NO_CLASSES_ENDING);
+			print ('ERROR: invalid ending status');
 		}
 	});}
 });

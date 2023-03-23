@@ -17,6 +17,7 @@ debug_endgame_off = True
 CONTINUE = 0
 NEGATIVE_HAPPINESS = 1
 START_FINALS = 2
+NO_CLASSES = 3
 
 class Game():
     """ Displays and runs the primary portion of the Becoming Physics Game.
@@ -200,9 +201,12 @@ class Game():
         if self.happiness <= 0 and debug_endgame_off:
             return NEGATIVE_HAPPINESS
         
-        # End game is triggered if player reaches day 10
+        # End game is triggered if player reaches DAYS_IN_QUARTER and debug mode is off
         if self.day >= DAYS_IN_QUARTER and debug_endgame_off:
-            return START_FINALS
+            if len(self.enrolled_physics_classes) == 0:
+                return NO_CLASSES
+            else:
+                return START_FINALS
 
         # Otherwise, continue playing
         return CONTINUE
@@ -755,20 +759,17 @@ class Game():
         :param gpa: The player's GPA
         """
         if 3.5 < gpa <= 4.0:
-            self.happiness = self.happiness + 100
+            return 100
         elif 3.0 < gpa <= 3.5:
-            self.happiness = self.happiness + 30
+            return 30
         elif 2.5 < gpa <= 3.0:
-            self.happiness = self.happiness + 10
+            return 10
         elif 2.0 < gpa <= 2.5:
-            self.happiness = self.happiness - 10
+            return -10
         elif 1.0 < gpa <= 2.0:
-            self.happiness = self.happiness - 30
+            return -30
         else:
-            self.happiness = self.happiness - 60
-
-        # Check player stat boundaries
-        self.check_boundaries()
+            return -60
         
     def do_final(self, class_index):
         """ Set up a final for a given PhysicsClass for the player to complete
@@ -802,7 +803,9 @@ class Game():
             gpa = gpa * 4./3.
             
             # Determine happiness change based on gpa
-            self.adjust_happiness_from_gpa(gpa)
+            delta_h = self.adjust_happiness_from_gpa(gpa)
+            self.show_stat_changes(delta_h, 0, 0)
+            self.happiness = self.happiness + delta_h
             self.check_boundaries()
             
             # Determine player ending based on final stats
@@ -888,6 +891,11 @@ class Game():
         self.check_boundaries()
         self.update_portrait()
 
+        if status == NO_CLASSES:
+            # If you enroll in no classes, call that no classes ending
+            self.end_screen(NO_CLASSES_ENDING)
+            return
+
         # create a new inner box
         document.getElementById('player_inner_box').remove()
         new_inner_box = document.createElement('div')
@@ -921,8 +929,7 @@ class Game():
             document.getElementById('final_button').addEventListener("click", lambda: self.do_final(0))
 
         else:
-            # If you enroll in no classes, call that no classes ending
-            self.end_screen(NO_CLASSES_ENDING)
+            print('ERROR: invalid ending status')
 
 class FirstScreen():
     """ FirstScreen is the first screen that is displayed in the Becoming Physics game.

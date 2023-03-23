@@ -595,6 +595,140 @@ lab_scenarios = [
         has_been_displayed=False,
         sibling=-1,
     ),
+    LabScenario(
+        scenario="You hear a knock on the lab door. Standing at the door is a person in a stormtrooper "\
+        "costume. It's a Star Wars LARPer. He needs to borrow a laser.",
+        choice1=Choice(
+            choice_text="You give him a laser pointer, warning him not to point it in anyone's eyes",
+            happiness=-20,
+            knowledge=0,
+            research=-20,
+            effect_text="Two days later you get a call from OSHA. Because of your lapse in judgement, your "\
+            "lab has to be shut down for two weeks and everyone has to retake safety training.",
+        ),
+        choice2=Choice(
+            choice_text="You tell him to leave before you tell Darth Vader what he's been up to",
+            happiness=10,
+            knowledge=0,
+            research=5,
+            effect_text="The man takes off his helmet. 'Congratulations, you've passed', he says."\
+            " It was an OSHA inspector. Your lab gets a small cash prize thanks to your diligence.",
+        ),
+        lab_category=SMALL_STUFF,
+        has_been_displayed=False,
+        sibling=14,
+    ),
+    LabScenario(
+        scenario="You hear a knock on the lab door. Standing at the door is a person in a stormtrooper "\
+        "costume. It's a Star Wars LARPer. He needs to borrow a laser.",
+        choice1=Choice(
+            choice_text="You give him a laser pointer, warning him not to point it in anyone's eyes",
+            happiness=10,
+            knowledge=0,
+            research=-5,
+            effect_text="The stormtrooper hugs you excitedly and then leaves. Two days later he"\
+            " sends you pictures of an epic lightsaber he's built. You text him back a thumbs up emoji",
+        ),
+        choice2=Choice(
+            choice_text="You tell him to leave before you tell Darth Vader what he's been up to",
+            happiness=-5,
+            knowledge=0,
+            research=0,
+            effect_text="The stormtrooper sighs loudly and walks away. You feel a little bit bad."
+        ),
+        lab_category=SMALL_STUFF,
+        has_been_displayed=False,
+        sibling=13,
+    ),
+    LabScenario(
+        scenario="Should you read the manual?",
+        choice1=Choice(
+            choice_text="Yes!",
+            happiness=-40,
+            knowledge=-10,
+            research=-20,
+            effect_text="You wasted so much time reading the manual that you had to take an extra year "\
+            "before you could graduate. Oops.",
+        ),
+        choice2=Choice(
+            choice_text="No!",
+            happiness=10,
+            knowledge=5,
+            research=20,
+            effect_text="You speedily figure out the apparatus without any manual. Not only do gain knowledge, "\
+            " you save lots of time.",
+        ),
+        lab_category=BOTH,
+        has_been_displayed=False,
+        sibling=16,
+    ),
+    LabScenario(
+        scenario="Should you read the manual?",
+        choice1=Choice(
+            choice_text="Yes!",
+            happiness=50,
+            knowledge=0,
+            research=0,
+            effect_text="The manual contains a message on the second to last page, written by an "\
+            "employee trapped in the manual factory. It asks to please send help. You call the police "\
+            "and tell them. Thanks to you, the employee was saved in the nick of time.",
+        ),
+        choice2=Choice(
+            choice_text="No!",
+            happiness=-20,
+            knowledge=0,
+            research=-20,
+            effect_text="While you are trying to figure out how to use the apparatus, you push the "\
+            "orange button. The entire apparatus crumbles into dust. Maybe you should have read the "\
+            "manual after all...",
+        ),
+        lab_category=BOTH,
+        has_been_displayed=False,
+        sibling=15,
+    ),
+    LabScenario(
+        scenario="Your lab just got a superconducting magnet, and your labmate asks if you want to go "\
+        "check it out. You want to but you can't remember if you have a pacemaker.",
+        choice1=Choice(
+            choice_text="Call Mom and ask if your operation at the age of 5 was for a bad heart",
+            happiness=-10,
+            knowledge=0,
+            research=-5,
+            effect_text="Your Mom tells you don't have a pacemaker. Now you feel embarrassed for forgetting "
+            "such an obvious thing.",
+        ),
+        choice2=Choice(
+            choice_text="Step into the magnetic field",
+            happiness=5,
+            knowledge=0,
+            research=15,
+            effect_text="Wheeee!",
+        ),
+        lab_category=SMALL_STUFF,
+        has_been_displayed=False,
+        sibling=-1,
+    ),
+    LabScenario(
+        scenario="What kind of music should you play during your daily rote task?",
+        choice1=Choice(
+            choice_text="Classical",
+            happiness=10,
+            knowledge=0,
+            research=0,
+            effect_text="You feel boosted in happiness.",
+        ),
+        choice2=Choice(
+            choice_text="Quantum",
+            happiness=-10,
+            knowledge=10,
+            research=10,
+            effect_text="You feel less happy but your knowledge and research increases.",
+        ),
+        lab_category=BOTH,
+        has_been_displayed=False,
+        sibling=-1,
+    ),
+
 ]
 
 
